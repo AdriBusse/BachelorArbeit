@@ -4,6 +4,7 @@ export const DEFOLLOWSUB = gql`
 mutation Unfollow($name: String!){
     defollowSub(name:$name){
      name
+     id
    }
  }
 `

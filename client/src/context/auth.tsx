@@ -51,6 +51,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const [fetchME, { data, loading, error }] = useLazyQuery(ME, {
     onCompleted: (data) => {
+      console.log("Finnish fetch User");
+
       if (data.me) dispatch('LOGIN', data.me);
 
     }

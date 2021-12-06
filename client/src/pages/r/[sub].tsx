@@ -36,7 +36,6 @@ export default function SubPage() {
 
     }
   })
-  console.log(sub);
 
   useEffect(() => {
     if (!sub) return;

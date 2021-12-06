@@ -6,6 +6,7 @@ import { Sub } from '../types';
 import FollowButtons from './FollowButtons';
 
 export default function Sidebar({ sub }: { sub: Sub }) {
+
   const { authenticated } = useAuthState();
   return (
     <div className="ml-6 w-80">

@@ -25,7 +25,10 @@ export default function Register() {
 
   const { authenticated } = useAuthState();
   const router = useRouter();
+  if (error) {
+    console.log(error.message);
 
+  }
   if (authenticated) {
     router.push('/');
   }
@@ -37,7 +40,6 @@ export default function Register() {
     }
 
     try {
-      console.log();
 
       registerMutation({
         variables: {
@@ -83,6 +85,9 @@ export default function Register() {
               <small className="block font-medium text-red-600">
                 {errors.agreement}
               </small>
+              {error && <small className="block font-medium text-red-600">
+                {error.message}
+              </small>}
             </div>
             <InputGroup
               className="mb-2"

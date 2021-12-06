@@ -13,12 +13,14 @@ query GetUser($username: String!){
     userSubmissions{
       __typename
           ... on Post {
-      title
+            id
+            title
             identifier
             userVote
             title
             body
             commentCount
+            username
             voteScore
             url
             subName
@@ -29,6 +31,7 @@ query GetUser($username: String!){
             
     }
       ...on Comment{
+        id
         body
         identifier
         username

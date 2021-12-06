@@ -6,7 +6,7 @@ import { createUploadLink } from 'apollo-upload-client'
 
 const link = createHttpLink({
     uri: `http://localhost:4000/graphql`,
-    credentials: 'include'
+    credentials: 'include',
 });
 const client = new ApolloClient({
 
@@ -31,7 +31,9 @@ const client = new ApolloClient({
     }),
     link: createUploadLink({
         uri: "http://localhost:4000/graphql",
-        credentials: 'include'
+        credentials: 'include',
+        useGETForQueries: true
+
 
     }),
 

@@ -5,7 +5,7 @@ query GetPosts($postPerPage: Float, $currentPage: Float){
   getPosts(postsPerPage: $postPerPage, currentPage: $currentPage){
     id
     identifier
- title
+    title
     subName
     username
     voteScore
@@ -19,6 +19,7 @@ query GetPosts($postPerPage: Float, $currentPage: Float){
     body
     url
     sub{
+      id
       imageUrl
     }
   }

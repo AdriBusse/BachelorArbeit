@@ -16,11 +16,12 @@ export default function submit() {
 
   const router = useRouter();
   const { sub: subName } = router.query;
-  const { data: sub, loading, error } = useQuery<Sub>(GETSUBFORCREATEPOST, { variables: { name: subName } })
+  const { data: sub, loading, error } = useQuery(GETSUBFORCREATEPOST, { variables: { name: subName }, skip: !subName });
   const [createPostMutation, { loading: postloading, data: postdata, error: posterror }] = useMutation(CREATEPOST, {
     onCompleted: (data) => {
       console.log(data);
-      router.push(`/r/${sub.name}/${data.createPost.identifier}/${data.createPost.slug}`);
+
+      router.push(`/r/${subName}/${data.createPost.identifier}/${data.createPost.slug}`);
 
     },
     update(cache, { data: { createPost } }) {
@@ -112,7 +113,7 @@ export default function submit() {
           </form>
         </div>
       </div>
-      {sub && <Sidebar sub={sub} />}
+      {sub && <Sidebar sub={sub.getSub} />}
     </div>
   );
 }

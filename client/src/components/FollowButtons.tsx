@@ -1,6 +1,6 @@
 import { useLazyQuery, useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useState } from "react";
 import { useAuthDispatch, useAuthState } from "../context/auth";
 import { GETSUB } from "../querys/getSub";
 import { FOLLOWSUB } from "../querys/mutations/followSub";
@@ -9,7 +9,7 @@ import { DEFOLLOWSUB } from "../querys/mutations/defollowSub"
 import { ME } from "../querys/meQuery";
 
 export default function FollowButtons({ sub }: { sub: Sub }) {
-
+    const [follow, setFollow] = useState(sub.userFollows)
     const { authenticated } = useAuthState();
     const dispatch = useAuthDispatch();
 
@@ -26,7 +26,7 @@ export default function FollowButtons({ sub }: { sub: Sub }) {
         try {
             await subscribe({ variables: { name: sub.name } })
             // await fetchME()
-            router.reload()
+            setFollow(1)
         } catch (error) {
             console.log(error);
 
@@ -41,21 +41,23 @@ export default function FollowButtons({ sub }: { sub: Sub }) {
         try {
             await unSubscribe({ variables: { name: sub.name } })
             // await fetchME()
-            router.reload()
+            setFollow(0)
         } catch (error) {
             console.log(error);
 
         }
 
     }
-    if (sub.userFollows) {
+    if (follow === 1) {
         return (
             <a onClick={handleUnFollow} className="w-full py-1 mb-2 text-sm cursor-pointer blue button">Unsubscribe</a>
         );
-    } else {
+    } else if (follow === 0) {
         return (
             <a onClick={handleFollow} className="w-full py-1 mb-2 text-sm cursor-pointer blue button">Subscribe</a>
         );
+    } else {
+        return null
     }
 
 }

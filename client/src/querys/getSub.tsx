@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const GETSUB = gql`
 query getSub($name: String!){
   getSub(name: $name){
+    id
     username
     title
     name
@@ -14,6 +15,7 @@ query getSub($name: String!){
     describtion
     createdAt
     posts{
+      id
       identifier
       userVote
       slug
@@ -27,6 +29,7 @@ query getSub($name: String!){
       subName
       voteScore
       sub{
+        id
         imageUrl
       }
     }

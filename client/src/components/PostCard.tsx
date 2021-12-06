@@ -137,7 +137,7 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
         <Link href={post.url}>
           <a className="my-1 text-lg font-medium">{post.title}</a>
         </Link>
-        {post.body && <p className="my-1 text-sm">{post.body}</p>}
+        {post.body && <p className="my-1 text-sm whitespace-pre-wrap">{post.body}</p>}
         <div className="flex">
           <Link href={post.url}>
             <a>

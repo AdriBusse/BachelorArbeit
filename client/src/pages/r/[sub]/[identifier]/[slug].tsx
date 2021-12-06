@@ -30,7 +30,7 @@ export default function PostPage() {
   const { identifier, sub, slug } = router.query;
   const [commentOPMutation, { loading: loadingcomment, data: datacomment, error: errorcomment }] = useMutation(COMMENTONPOST)
   const [voteMutation, { loading: loadingvote, data: datavote, error: errorvote }] = useMutation(VOTE)
-  const { data: post, loading, error } = useQuery(GETPOST, { variables: { identifier, slug } })
+  const { data: post, loading, error } = useQuery(GETPOST, { variables: { identifier, slug }, skip: (!slug || !identifier) })
 
   const [deletePostMutation, { data: deleteReturn, error: deleteError }] = useMutation(DELETEPOST, {
     update(cache) {
@@ -191,7 +191,7 @@ export default function PostPage() {
                         </p>
                       </div>
                       <h1 className="my-1 text-xl font-medium">{post.getPost.title}</h1>
-                      <p className="my-3 text-sm">{post.getPost.body}</p>
+                      <p className="my-3 text-sm whitespace-pre-wrap">{post.getPost.body}</p>
                       {/**Actions */}
                       <div className="flex">
                         <Link href={post.getPost.url}>
@@ -309,7 +309,7 @@ export default function PostPage() {
                               comment.createdAt
                             ).fromNow()}`}</span>
                         </p>
-                        <p>{comment.body}</p>
+                        <p className="whitespace-pre-wrap">{comment.body}</p>
                       </div>
                     </div>
                   ))}

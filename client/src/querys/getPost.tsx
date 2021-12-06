@@ -16,9 +16,11 @@ query getPost($slug: String!, $identifier: String!){
     commentCount
     slug
     sub{
+      id
       imageUrl
     }
     comments{
+      id
       identifier
       userVote
       voteScore
@@ -27,6 +29,7 @@ query getPost($slug: String!, $identifier: String!){
       body
     }
     sub{
+      id
       describtion
       createdAt
       name

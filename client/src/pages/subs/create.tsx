@@ -11,13 +11,16 @@ export default function create() {
   const [name, setName] = useState('');
   const [title, setTitle] = useState('');
   const [describtion, setDescribtion] = useState('');
-  const [errors, setErrors] = useState<Partial<any>>({});
+  const [errors, setErrors] = useState<any>({});
   const router = useRouter();
   const [createSubMutation, { data, error, loading }] = useMutation(CREATESUB, {
     onCompleted: (data) => {
-      router.reload()
+      // router.reload()
       router.push(`/r/${data.createSub.name}`);
 
+    },
+    onError: (error) => {
+      setErrors(error.message)
     }
   })
   const submitForm = async (event: FormEvent) => {
@@ -27,13 +30,14 @@ export default function create() {
       await createSubMutation({
         variables: {
           title, name, describtion
-        }
+        },
+
       })
     } catch (error) {
       console.log(error);
 
       console.log(error.response.data);
-      setErrors(error.response.data);
+
     }
   };
   !loading && console.log(data);
