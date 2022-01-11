@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GETALLSUBS = gql`query{
+export const GETALLSUBS = gql`query GetSubs{
   getSubs{
     id
     name
@@ -9,9 +9,6 @@ export const GETALLSUBS = gql`query{
     imageUrn
     bannerUrn
     username
-    user{
-      id
-    }
     posts{
       id
       votes{

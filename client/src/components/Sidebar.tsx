@@ -32,7 +32,7 @@ export default function Sidebar({ sub }: { sub: Sub }) {
           </p>
           <FollowButtons sub={sub} />
           {authenticated && (
-            <Link href={`/r/${sub.name}/submit`}>
+            <Link prefetch={false} href={`/r/${sub.name}/submit`}>
               <a className="w-full py-1 text-sm blue button">Create Post</a>
             </Link>
           )}

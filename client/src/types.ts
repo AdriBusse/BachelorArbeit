@@ -25,6 +25,7 @@ export interface User {
 }
 
 export interface Sub {
+  id: string;
   createdAt: string;
   updatedAt: string;
   name: string;

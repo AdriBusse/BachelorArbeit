@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       if (data.me) dispatch('LOGIN', data.me);
 
-    }
+    },
   })
 
   const dispatch = (type: string, payload?: any) =>

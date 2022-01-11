@@ -5,6 +5,7 @@ export const CREATEPOST = gql`
  mutation CreatePost($sub:String!, $title:String!, $body:String!){
     createPost(sub: $sub, title: $title, body: $body){
       id
+      __typename
       identifier
       title
       slug
@@ -13,6 +14,12 @@ export const CREATEPOST = gql`
       username
       commentCount
       voteScore
+      sub{
+        id
+      }
+      url
+      createdAt
+      userVote
     }
   }
  `

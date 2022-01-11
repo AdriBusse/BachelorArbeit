@@ -1,3 +1,4 @@
+import { UpdateSubResolver } from './../modules/subs/updateSub';
 import { DeletePostResolver } from './../modules/post/deletePost';
 import { DefollowSubResolver } from './../modules/subs/defollowSub';
 import { FollowSubResolver } from './../modules/subs/followSub';
@@ -28,10 +29,11 @@ import { CommentResolver } from '../modules/classResolvers/CommentResolver';
 import { VoteClassResolver } from '../modules/classResolvers/VoteResolver';
 
 export const createSchema = () => buildSchema({
+    directives: [],
     resolvers: [ConfirmUserResolver, ForgetPasswordResolver, LoginResolver, LogoutResolver, MeResolver, RegisterResolver, ChangePasswordResolver,
-        CreateSubResolver, GetSubsResolver, GetSubResolver, SearchSubResolver, SubUploadResolver, FollowSubResolver, DefollowSubResolver,
+        CreateSubResolver, GetSubsResolver, GetSubResolver, SearchSubResolver, SubUploadResolver, FollowSubResolver, DefollowSubResolver, UpdateSubResolver,
         CreatePostResolver, GetPostResolver, GetPostsResolver, CommentOnPostResolver, DeletePostResolver,
         VoteResolver, topSubsResolver, GetUserResolver,
         UserResolver, VoteClassResolver, SubResolver, PostResolver, CommentResolver],
-
 });
+

@@ -13,25 +13,20 @@ import { VOTE } from '../querys/mutations/vote';
 import { GETSUB } from '../querys/getSub';
 import { DELETEPOST } from '../querys/mutations/deletePost';
 import { GETPOSTS } from '../querys/getPosts';
+import DeletePostButton from './DeletePostButton';
 dayjs.extend(relativeTime);
 
 interface PostCardProps {
   post: Post;
   revalidate?: Function;
+  subId: string;
 }
 
-export default function PostCard({ post, revalidate }: PostCardProps) {
+export default function PostCard({ post, revalidate, subId }: PostCardProps) {
   const { authenticated, user } = useAuthState();
   const router = useRouter();
   const [voteMutation, { data, loading, error }] = useMutation(VOTE, { refetchQueries: [GETSUB] })
-  const [deletePostMutation, { data: deleteReturn, error: deleteError }] = useMutation(DELETEPOST, {
-    update(cache) {
-      const id = post.id
-      const normalizedId = cache.identify({ id, __typename: 'Post' });
-      cache.evict({ id: normalizedId });
-      cache.gc();
-    }
-  })
+
 
 
   const isInSubPage = router.pathname === '/r/[sub]'; // /r/[sub]
@@ -39,7 +34,6 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
     if (!authenticated) {
       router.push('/login');
       return
-
     }
     if (value === post.userVote) value = 0;
     try {
@@ -55,15 +49,7 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
       console.log(error);
     }
   };
-  const onDelete = () => {
-    if (confirm('Are you sure you want to delete this post?')) {
-      deletePostMutation({
-        variables: {
-          identifier: post.identifier,
-        }
-      })
-    }
-  }
+
   return (
     <div
       key={post.identifier}
@@ -101,7 +87,7 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
         <div className="flex items-center">
           {!isInSubPage && (
             <>
-              <Link href={`/r/${post.subName}`}>
+              <Link prefetch={false} href={`/r/${post.subName}`}>
                 <a>
                   <Image
                     src={
@@ -114,7 +100,7 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
                   ></Image>
                 </a>
               </Link>
-              <Link href={`/r/${post.subName}`}>
+              <Link prefetch={false} href={`/r/${post.subName}`}>
                 <a className="text-xs font-bold cursor-pointer hover:underline">
                   /r/{post.subName}
                 </a>
@@ -124,22 +110,22 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
           )}
           <p className="text-xs text-gray-600">
             Posted by
-            <Link href={`/u/${post.username}`}>
+            <Link prefetch={false} href={`/u/${post.username}`}>
               <a className="mx-1 hover:underline">{`/u/${post.username}`}</a>
             </Link>
-            <Link href={post.url}>
+            <Link prefetch={false} href={post.url}>
               <a className="mx-1 hover:underline">
                 {dayjs(post.createdAt).fromNow()}
               </a>
             </Link>
           </p>
         </div>
-        <Link href={post.url}>
+        <Link prefetch={false} href={post.url}>
           <a className="my-1 text-lg font-medium">{post.title}</a>
         </Link>
         {post.body && <p className="my-1 text-sm whitespace-pre-wrap">{post.body}</p>}
         <div className="flex">
-          <Link href={post.url}>
+          <Link prefetch={false} href={post.url}>
             <a>
               <ActionButton>
                 <i className="mr-1 fas fa-comment-alt fa-xs"></i>
@@ -151,17 +137,12 @@ export default function PostCard({ post, revalidate }: PostCardProps) {
             <i className="mr-1 fas fa-share fa-xs"></i>
             <span className="font-bold">Share</span>
           </ActionButton>
-          <ActionButton>
+          <ActionButton >
             <i className="mr-1 fas fa-bookmark fa-xs"></i>
             <span className="font-bold">Save</span>
           </ActionButton>
           {user && user.username === post.username && (
-            <div className="cursor-pointer" onClick={() => onDelete()}>
-              <ActionButton >
-                <i className="mr-1 fas fa-trash-alt fa-xs"></i>
-                <span className="font-bold">Delete</span>
-              </ActionButton>
-            </div>
+            <DeletePostButton subId={subId} postId={post.id} postIdentifier={post.identifier} />
           )}
         </div>
       </div>

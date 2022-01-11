@@ -9,6 +9,7 @@ export class GetUserResolver {
     ) {
 
         try {
+
             const user = await User.findOneOrFail({
                 where: { username: username },
             });

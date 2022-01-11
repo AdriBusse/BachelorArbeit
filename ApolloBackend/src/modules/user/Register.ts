@@ -1,4 +1,4 @@
-import { Arg, Mutation, Query, Resolver } from "type-graphql";
+import { Arg, Mutation, Resolver } from "type-graphql";
 import User from "../../entity/User"
 import { RegisterInput } from "./register/RegisterInput";
 //import { sendMail } from "../utils/sendEmail"
@@ -6,10 +6,7 @@ import { RegisterInput } from "./register/RegisterInput";
 import { validate } from "class-validator";
 @Resolver(User)
 export class RegisterResolver {
-    @Query(() => String)
-    async hello() {
-        return "Hello World";
-    }
+
 
 
     @Mutation(() => User, { nullable: true })

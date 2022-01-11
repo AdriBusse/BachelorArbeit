@@ -1,6 +1,6 @@
 import { UserSubmissionType } from './gql/SubmissionType';
 import { IsEmail, Length } from "class-validator";
-import { Field, ID, ObjectType, Root } from "type-graphql";
+import { Directive, Field, ID, ObjectType, Root } from "type-graphql";
 import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, Index, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Vote from "./Vote";
 import bcrypt from 'bcrypt';
@@ -11,7 +11,7 @@ import { Sub } from './Sub';
 
 
 
-
+@Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
 @ObjectType()
 @Entity({ name: 'Users' })
 export default class User extends BaseEntity {
@@ -23,12 +23,14 @@ export default class User extends BaseEntity {
     @Index()
     @Field(() => ID)
     @PrimaryGeneratedColumn()
+    @Directive("@cacheControl(maxAge: 10000, scope: PUBLIC)")
     id: number;
 
     @Field()
     @Index() //Improve Performance
     @Column({ unique: true })
     @Length(3, 255, { message: 'Must be at least 3 characters long' })
+    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     username: string;
 
     @Field({ nullable: true })

@@ -7,6 +7,8 @@ export const GETSUBFORCREATEPOST = gql`query getSubForCreate($name: String!){
       describtion
       createdAt
       userFollows
+      bannerUrl
+      title
   }
   }
   `

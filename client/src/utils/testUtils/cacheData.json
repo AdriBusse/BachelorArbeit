@@ -1,0 +1,327 @@
+{
+    "Sub:3": {
+        "id": "3",
+        "__typename": "Sub",
+        "name": "typescript",
+        "title": "TS Comunity ",
+        "imageUrl": "http://localhost:4000/images/subs/image/1633607960179communityIcon_4w7vh6c21f871.png",
+        "postCount": 6
+    },
+    "Sub:17": {
+        "id": "17",
+        "__typename": "Sub",
+        "name": "Data is nice",
+        "title": "Data is Beautiful",
+        "imageUrl": "http://localhost:4000/images/subs/image/1633607862439splash.png",
+        "postCount": 5
+    },
+    "Sub:18": {
+        "id": "18",
+        "__typename": "Sub",
+        "name": "Streetfood",
+        "title": "Streetfood",
+        "imageUrl": "http://localhost:4000/images/subs/image/16389599400374pmBlog.svg",
+        "postCount": 2
+    },
+    "Sub:19": {
+        "id": "19",
+        "__typename": "Sub",
+        "name": "WebDev",
+        "title": "WebDev",
+        "imageUrl": "http://localhost:4000/images/subs/image/1638783952267communityIcon_kxcmzy9bt1381.jpg",
+        "postCount": 2
+    },
+    "Sub:1": {
+        "id": "1",
+        "__typename": "Sub",
+        "name": "first sub",
+        "title": "first sub",
+        "imageUrl": "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+        "postCount": 1
+    },
+    "ROOT_QUERY": {
+        "__typename": "Query",
+        "topSubs": [
+            {
+                "__ref": "Sub:3"
+            },
+            {
+                "__ref": "Sub:17"
+            },
+            {
+                "__ref": "Sub:18"
+            },
+            {
+                "__ref": "Sub:19"
+            },
+            {
+                "__ref": "Sub:1"
+            }
+        ],
+        "me": {
+            "__ref": "User:9"
+        },
+        "getPosts": [
+            {
+                "__ref": "Post:43"
+            },
+            {
+                "__ref": "Post:42"
+            },
+            {
+                "__ref": "Post:41"
+            },
+            {
+                "__ref": "Post:40"
+            },
+            {
+                "__ref": "Post:39"
+            },
+            {
+                "__ref": "Post:38"
+            },
+            {
+                "__ref": "Post:37"
+            },
+            {
+                "__ref": "Post:36"
+            },
+            {
+                "__ref": "Post:35"
+            },
+            {
+                "__ref": "Post:34"
+            }
+        ],
+        "getUser({\"username\":\"AD__\"})": {
+            "__ref": "User:9"
+        }
+    },
+    "User:9": {
+        "id": "9",
+        "__typename": "User",
+        "name": "null null",
+        "email": "adri@busse.vn",
+        "username": "AD__",
+        "followedSubs": [
+            {
+                "__typename": "Sub",
+                "title": "Streetfood",
+                "name": "Streetfood",
+                "imageUrl": "http://localhost:4000/images/subs/image/16389599400374pmBlog.svg",
+                "postCount": 2
+            },
+            {
+                "__typename": "Sub",
+                "title": "ReactJS",
+                "name": "ReactJS",
+                "imageUrl": "http://localhost:4000/images/subs/image/1638960018518communityIcon_fbblpo38vy941.png",
+                "postCount": 1
+            },
+            {
+                "__typename": "Sub",
+                "title": "Data is Beautiful",
+                "name": "Data is nice",
+                "imageUrl": "http://localhost:4000/images/subs/image/1633607862439splash.png",
+                "postCount": 5
+            },
+            {
+                "__typename": "Sub",
+                "title": "TS Comunity ",
+                "name": "typescript",
+                "imageUrl": "http://localhost:4000/images/subs/image/1633607960179communityIcon_4w7vh6c21f871.png",
+                "postCount": 6
+            }
+        ]
+    },
+    "Post:43": {
+        "id": "43",
+        "__typename": "Post",
+        "identifier": "nro7axP",
+        "title": "How do you use const and let keyword?",
+        "subName": "typescript",
+        "username": "AD__",
+        "voteScore": 0,
+        "url": "/r/typescript/nro7axP/how_do_you_use_const_and_let_keyword",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "how_do_you_use_const_and_let_keyword",
+        "createdAt": "2021-12-06T20:13:03.754Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:3"
+        }
+    },
+    "Post:42": {
+        "id": "42",
+        "__typename": "Post",
+        "identifier": "oxUyymE",
+        "title": "Vue or React?",
+        "subName": "WebDev",
+        "username": "AD__",
+        "voteScore": 0,
+        "url": "/r/WebDev/oxUyymE/vue_or_react",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "vue_or_react",
+        "createdAt": "2021-12-06T20:11:43.052Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:19"
+        }
+    },
+    "Sub:23": {
+        "id": "23",
+        "__typename": "Sub",
+        "imageUrl": "http://localhost:4000/images/subs/image/1638960018518communityIcon_fbblpo38vy941.png"
+    },
+    "Post:41": {
+        "id": "41",
+        "__typename": "Post",
+        "identifier": "wrqwcur",
+        "title": "Just Refactor my App for testing",
+        "subName": "ReactJS",
+        "username": "AD__",
+        "voteScore": 0,
+        "url": "/r/ReactJS/wrqwcur/just_refactor_my_app_for_testing",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "just_refactor_my_app_for_testing",
+        "createdAt": "2021-12-06T20:10:08.293Z",
+        "body": "aww that was work...",
+        "sub": {
+            "__ref": "Sub:23"
+        }
+    },
+    "Sub:21": {
+        "id": "21",
+        "__typename": "Sub",
+        "imageUrl": "http://localhost:4000/images/subs/image/1638783912846communityIcon_7jxh2j4ouky41.png"
+    },
+    "Post:40": {
+        "id": "40",
+        "__typename": "Post",
+        "identifier": "cXPtvLa",
+        "title": "Why I remain bullish on crypto",
+        "subName": "Crypto",
+        "username": "MaxMuster",
+        "voteScore": 0,
+        "url": "/r/Crypto/cXPtvLa/why_i_remain_bullish_on_crypto",
+        "commentCount": 1,
+        "userVote": 0,
+        "slug": "why_i_remain_bullish_on_crypto",
+        "createdAt": "2021-12-06T08:42:07.065Z",
+        "body": "Every time the price dips, the bears come crawling out of their caverns. We could even call this a crash, dump or what ever. Does it change anything for the HODLers? I unless you need to get out for some reason, no.\n\nI dont care about all the articles screaming about a 100k BTC or a 500k btc, neither about youtubers telling you the same thing. Even if we go through a 4 year old bear marked or whatever, I really dont care.\n\nFor the average investeror, price fluctuation doesn't really mather if you just want to HODL.\n\nIt's a lot of psykological pressure involved, expecially if you're in it to get rich fast. I dont believe it's possible to get rich fast for most people, but crypto could be a hedge against inflation and I do believe crypto will continiue to grow over the next 10 years.\n\nIt's hard to see red numbers, but it's not a loss before you decide to sell!\n\nWhat are your take on crypto? Bullish? Bearish? Neither?",
+        "sub": {
+            "__ref": "Sub:21"
+        }
+    },
+    "Post:39": {
+        "id": "39",
+        "__typename": "Post",
+        "identifier": "9ynMsO6",
+        "title": "Is Web3 really the future?",
+        "subName": "WebDev",
+        "username": "MaxMuster",
+        "voteScore": 2,
+        "url": "/r/WebDev/9ynMsO6/is_web3_really_the_future",
+        "commentCount": 1,
+        "userVote": 1,
+        "slug": "is_web3_really_the_future",
+        "createdAt": "2021-12-06T08:38:11.669Z",
+        "body": "I've seen many posts on Tech Twitter talking about how Web3 is the future, but also Tech Twitter is full of people who either think JS is the best programming language or the worst, so it's filled with a lot of people who would just get into the first wagon it comes around, so I'd like to ask outside of Tech Twitter.\n\nIs Web3 really the future? Is it worth learning? What do you think?\n\nI don't really trust Tech Twitter at all to be totally honest...",
+        "sub": {
+            "__ref": "Sub:19"
+        }
+    },
+    "Post:38": {
+        "id": "38",
+        "__typename": "Post",
+        "identifier": "URDck2G",
+        "title": "Hottes Tacos in Mexico",
+        "subName": "Streetfood",
+        "username": "JohnDoe",
+        "voteScore": 0,
+        "url": "/r/Streetfood/URDck2G/hottes_tacos_in_mexico",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "hottes_tacos_in_mexico",
+        "createdAt": "2021-12-05T17:48:01.381Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:18"
+        }
+    },
+    "Post:37": {
+        "id": "37",
+        "__typename": "Post",
+        "identifier": "5ihzIe3",
+        "title": "You need to try Saigonese Streetfood",
+        "subName": "Streetfood",
+        "username": "JohnDoe",
+        "voteScore": 0,
+        "url": "/r/Streetfood/5ihzIe3/you_need_to_try_saigonese_streetfood",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "you_need_to_try_saigonese_streetfood",
+        "createdAt": "2021-12-05T17:41:21.173Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:18"
+        }
+    },
+    "Post:36": {
+        "id": "36",
+        "__typename": "Post",
+        "identifier": "OdXTiqh",
+        "title": "2022 will be the hottest year",
+        "subName": "Data is nice",
+        "username": "JohnDoe",
+        "voteScore": 0,
+        "url": "/r/Data is nice/OdXTiqh/2022_will_be_the_hottest_year",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "2022_will_be_the_hottest_year",
+        "createdAt": "2021-12-05T17:38:16.308Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:17"
+        }
+    },
+    "Post:35": {
+        "id": "35",
+        "__typename": "Post",
+        "identifier": "6oY6xdx",
+        "title": "new Post",
+        "subName": "Data is nice",
+        "username": "AD__",
+        "voteScore": 0,
+        "url": "/r/Data is nice/6oY6xdx/new_post",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "new_post",
+        "createdAt": "2021-12-05T13:16:08.671Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:17"
+        }
+    },
+    "Post:34": {
+        "id": "34",
+        "__typename": "Post",
+        "identifier": "tBmhNG5",
+        "title": "I am in Cache?",
+        "subName": "Data is nice",
+        "username": "AD__",
+        "voteScore": 0,
+        "url": "/r/Data is nice/tBmhNG5/i_am_in_cache",
+        "commentCount": 0,
+        "userVote": 0,
+        "slug": "i_am_in_cache",
+        "createdAt": "2021-12-05T13:08:34.273Z",
+        "body": "",
+        "sub": {
+            "__ref": "Sub:17"
+        }
+    }
+}
