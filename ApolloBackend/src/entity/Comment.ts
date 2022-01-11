@@ -15,9 +15,10 @@ import { Exclude, Expose } from 'class-transformer';
 import User from './User';
 import { Post } from './Post';
 import Vote from './Vote';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Directive, Field, ID, ObjectType } from 'type-graphql';
 import { makeId } from '../modules/utils/makeId';
 
+@Directive("@cacheControl(maxAge: 10, scope: PUBLIC)")
 @ObjectType()
 @Entity({ name: 'Comments' })
 export default class Comment extends BaseEntity {

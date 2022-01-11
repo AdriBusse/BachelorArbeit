@@ -15,10 +15,6 @@ query getPost($slug: String!, $identifier: String!){
     body
     commentCount
     slug
-    sub{
-      id
-      imageUrl
-    }
     comments{
       id
       identifier
@@ -33,6 +29,7 @@ query getPost($slug: String!, $identifier: String!){
       describtion
       createdAt
       name
+      imageUrl
     }
     
   }}

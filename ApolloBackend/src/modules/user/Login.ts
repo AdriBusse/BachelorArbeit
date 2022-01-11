@@ -1,8 +1,7 @@
-import { Arg, Ctx, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
+import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import bcrypt from "bcryptjs"
 import User from "../../entity/User"
 import { MyContext } from "../../types/MyContext";
-import { isAuth } from "../middleware/isAuth";
 import { isEmpty } from "class-validator";
 import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
@@ -12,11 +11,7 @@ import cookie from 'cookie';
 
 @Resolver(User)
 export class LoginResolver {
-    @UseMiddleware(isAuth)
-    @Query(() => String)
-    async helloAuth() {
-        return "Hello World";
-    }
+
 
     @Mutation(() => User, { nullable: true })
     async login(

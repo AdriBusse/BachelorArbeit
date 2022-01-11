@@ -3,6 +3,7 @@ import { gql } from "@apollo/client";
 export const GETUSER = gql`
 query GetUser($username: String!){
   getUser(username: $username){
+    #Kommentardasda
     id
     username
     firstName

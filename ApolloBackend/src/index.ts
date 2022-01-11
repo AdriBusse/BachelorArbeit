@@ -3,7 +3,7 @@ import { ApolloServer } from 'apollo-server-express'
 import Express from 'express'
 import { createConnection } from "typeorm";
 import cookieParser from "cookie-parser"
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { ApolloServerPluginCacheControl, ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { createSchema } from "./utils/createSchema";
 import dotenv from 'dotenv';
 import user from "./modules/middleware/user";
@@ -32,9 +32,14 @@ const main = async () => {
 
     const schema = await createSchema()
 
+
+
+
+
+
     const apolloServer = new ApolloServer({
         schema,
-        plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+        plugins: [ApolloServerPluginLandingPageGraphQLPlayground(), ApolloServerPluginCacheControl({ defaultMaxAge: 5 })],
         context: ({ req, res }: any) => ({ req, res }), // just for access the context
     })
 
@@ -56,6 +61,7 @@ const main = async () => {
     await apolloServer.start();
     app.use(graphqlUploadExpress());
     apolloServer.applyMiddleware({
+
         app, cors: {
             credentials: true,
             origin: ['https://studio.apollographql.com', 'http://localhost:3000'],

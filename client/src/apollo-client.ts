@@ -2,15 +2,21 @@
 
 import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from 'apollo-upload-client'
+import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
+import 'cross-fetch/polyfill';
+import { sha256 } from 'crypto-hash';
 
 
-const link = createHttpLink({
-    uri: `http://localhost:4000/graphql`,
-    credentials: 'include',
-});
+const linkChain = createPersistedQueryLink({ sha256, useGETForHashedQueries: true }).concat(
+    createUploadLink({
+        uri: "http://localhost:4000/graphql",
+        credentials: 'include',
+        useGETForQueries: true
+
+
+    })
+)
 const client = new ApolloClient({
-
-
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
@@ -29,14 +35,12 @@ const client = new ApolloClient({
             }
         }
     }),
-    link: createUploadLink({
-        uri: "http://localhost:4000/graphql",
-        credentials: 'include',
-        useGETForQueries: true
-
-
-    }),
+    link: linkChain,
 
 });
+export const printCache = () => {
+    const serializedState = client.cache.extract();
+    console.log(serializedState)
+}
 
 export default client;

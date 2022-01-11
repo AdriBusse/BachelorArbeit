@@ -1,21 +1,21 @@
 import dayjs from 'dayjs';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react';
-import { useAuthState } from '../../context/auth';
-
+import React from 'react'
+import { useAuthState } from '../../../../context/auth';
+import { Sub } from '../../../../types';
 import Image from 'next/image';
+import { useQuery } from '@apollo/client';
+import { GETUSER } from '../../../../querys/getUser';
+import { MESUBS } from '../../../../querys/getUserFollowedSubs';
 
+interface Props {
+    username: string;
+}
 
-import { Post, Comment, User, Sub } from '../../types';
-
-export default function user() {
-    const router = useRouter();
+const UserSubs = ({ username }: Props) => {
     const { authenticated, user } = useAuthState();
-    console.log(user);
-
-
+    let { loading, data, error } = useQuery(MESUBS, { variables: { username }, skip: !username });
 
     return (
         <div>
@@ -23,17 +23,17 @@ export default function user() {
             <Head>
                 <title>{'Followed Subs'}</title>
             </Head>
-            {user && (
+            {data && user && (
 
                 <div className="container flex pt-5">
                     <div className="w-160">
-                        {user.followedSubs.map((sub: Sub) => {
+                        {data.getUser.followedSubs.map((sub: Sub) => {
                             return (
                                 <div
                                     key={sub.name}
                                     className="flex items-center px-4 py-2 text-xs border-b"
                                 >
-                                    <Link href={`/r/${sub.name}`}>
+                                    <Link prefetch={false} href={`/r/${sub.name}`}>
                                         <a className=" hover:cursor-pointer">
                                             <Image
                                                 className="overflow-hidden rounded-full "
@@ -45,7 +45,7 @@ export default function user() {
                                         </a>
                                     </Link>
 
-                                    <Link href={`/r/${sub.name}`}>
+                                    <Link prefetch={false} href={`/r/${sub.name}`}>
                                         <a className="ml-1 font-bold hover:cursor-pointer">
                                             /r/{sub.name}
                                         </a>
@@ -77,5 +77,7 @@ export default function user() {
             )}
 
         </div>
-    );
+    )
 }
+
+export default UserSubs

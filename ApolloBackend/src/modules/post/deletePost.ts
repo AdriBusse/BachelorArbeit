@@ -5,21 +5,20 @@ import { Post } from '../../entity/Post';
 
 @Resolver(Post)
 export class DeletePostResolver {
-    @Mutation(() => Post, { nullable: true })
+    @Mutation(() => Boolean, { nullable: true })
     @UseMiddleware(isAuth, isPostOwner)
     async deletePost(
         @Arg("identifier") identifier: string,
-    ): Promise<Post> {
+    ): Promise<Boolean> {
         try {
 
             const post = await Post.findOne({ where: { identifier } })
 
             if (!post) { throw new Error("Post not found") }
-
             await post?.remove()
 
 
-            return post;
+            return true;
 
         } catch (error) {
             console.log(error);

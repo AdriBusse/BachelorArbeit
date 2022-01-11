@@ -15,11 +15,11 @@ export class topSubsResolver {
             const subs = await getConnection()
                 .createQueryBuilder()
                 .select(
-                    `s.title, s.name, s.imageUrn as imageUrn, ${imageUrlExp} as "imageUrl", count(p.id) as "postCount"`
+                    `s.title, s.name, s.id, s.imageUrn as imageUrn, ${imageUrlExp} as "imageUrl", count(p.id) as "postCount"`
                 )
                 .from(Sub, 's')
                 .leftJoin(Post, 'p', `s.name = p."subName"`)
-                .groupBy('s.title, s.name,"imageUrl", "imageUrn"')
+                .groupBy('s.title, s.name, s.id, "imageUrl", "imageUrn"')
                 .orderBy(`"postCount"`, 'DESC')
                 .limit(5)
                 .execute();

@@ -8,8 +8,8 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import client from '../apollo-client';
 import { ApolloProvider } from '@apollo/client';
-import axios from 'axios';
-import { event } from '../utils/sw';
+
+import PerformanceTestButton from '../components/PerformanceTestButton';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -27,6 +27,7 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </AuthProvider >
+      <PerformanceTestButton />
     </ApolloProvider>)
 }
 export default App
