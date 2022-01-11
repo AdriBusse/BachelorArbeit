@@ -10,8 +10,9 @@ const isGraphQLGet = request => {
     return (request.method === "GET");
 };
 const isNotRestrictedQuery = request => {
-    // TODO
-    return true
+    const exclude = [/=ME&/];
+    console.log(request.url);
+    return !exclude.some(r => r.test(request.url));
 };
 
 async function getCache(request) {

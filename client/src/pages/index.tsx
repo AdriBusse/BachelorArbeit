@@ -1,4 +1,3 @@
-import { withCoalescedInvoke } from 'next/dist/lib/coalesced-function';
 import React, { useEffect } from 'react';
 import IndexComponent from '../pageComponents/IndexComponent';
 
