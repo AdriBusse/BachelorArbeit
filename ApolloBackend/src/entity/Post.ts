@@ -17,12 +17,13 @@ import { Sub } from './Sub';
 import Comment from './Comment';
 import Vote from './Vote';
 import { Exclude, Expose } from 'class-transformer';
-import { Field, ID, ObjectType } from 'type-graphql';
+import { Directive, Field, ID, ObjectType } from 'type-graphql';
 import { makeId } from '../modules/utils/makeId';
 import { slugify } from '../modules/utils/slugify';
 
 @ObjectType()
 @Entity({ name: 'Posts' })
+@Directive("@cacheControl(maxAge: 60, scope: PUBLIC)")
 export class Post extends BaseEntity {
   constructor(post: Partial<Post>) {
     super()
@@ -31,32 +32,39 @@ export class Post extends BaseEntity {
 
   @Field(() => ID)
   @PrimaryGeneratedColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   id: number;
 
   @Index()
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 200, scope: PUBLIC)")
   identifier: string; //7 char ID
 
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   title: string;
 
   @Index()
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 200, scope: PUBLIC)")
   slug: string;
 
   @Column({ nullable: true, type: 'text' })
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   body: string;
 
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 200, scope: PUBLIC)")
   subName: string;
 
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   username: string; //by default join column is not include to the response
 
   @ManyToOne(() => User, (user) => user.posts)
@@ -80,6 +88,7 @@ export class Post extends BaseEntity {
   votes: Vote[];
 
   @Field()
+  @Directive("@cacheControl(maxAge: 5, scope: PRIVATE)")
   protected userVote: number;
   setUserVote(user: User) {
     if (user) {
@@ -93,12 +102,14 @@ export class Post extends BaseEntity {
   @Field()
   protected url: string;
   @AfterLoad()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   createFields() {
     this.url = `/r/${this.subName}/${this.identifier}/${this.slug}`;
   }
 
   //virtuell field. Not in DB (Same like url field)
   @Field()
+  @Directive("@cacheControl(maxAge: 60, scope: PUBLIC)")
   @Expose() get commentCount(): number {
     if (this.comments != undefined) {
       return this.comments.length;
@@ -108,6 +119,7 @@ export class Post extends BaseEntity {
   }
   //? behind votes and comments
   @Field()
+  @Directive("@cacheControl(maxAge: 20, scope: PUBLIC)")
   @Expose() get voteScore(): number {
     if (this.votes != undefined) {
       return this.votes.reduce((prev, curr) => prev + (curr.value || 0), 0);
@@ -117,10 +129,12 @@ export class Post extends BaseEntity {
   }
   @Field()
   @CreateDateColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   createdAt: Date;
 
   @Field()
   @UpdateDateColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   updatedAt: Date;
 
   @BeforeInsert()

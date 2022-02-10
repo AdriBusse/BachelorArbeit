@@ -18,7 +18,7 @@ import Vote from './Vote';
 import { Directive, Field, ID, ObjectType } from 'type-graphql';
 import { makeId } from '../modules/utils/makeId';
 
-@Directive("@cacheControl(maxAge: 10, scope: PUBLIC)")
+@Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
 @ObjectType()
 @Entity({ name: 'Comments' })
 export default class Comment extends BaseEntity {
@@ -30,19 +30,23 @@ export default class Comment extends BaseEntity {
   @Index()
   @Field(() => ID)
   @PrimaryGeneratedColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   id: number;
 
   @Index()
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   identifier: string; //7 char ID
 
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   body: string;
 
   @Column()
   @Field()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   username: string;
 
   @ManyToOne(() => User)
@@ -60,12 +64,14 @@ export default class Comment extends BaseEntity {
   votes: Vote[];
 
   @Field()
+  @Directive("@cacheControl(maxAge: 10, scope: PRIVATE)")
   protected userVote: number;
   setUserVote(user: User) {
     const index = this.votes?.findIndex((v) => v.username === user.username)
     this.userVote = index > -1 ? this.votes[index].value : 0
   }
   @Field()
+  @Directive("@cacheControl(maxAge: 10, scope: PUBLIC)")
   @Expose() get voteScore(): number {
     if (this.votes != undefined) {
       return this.votes.reduce((prev, curr) => prev + (curr.value || 0), 0);
@@ -75,10 +81,12 @@ export default class Comment extends BaseEntity {
   }
   @Field()
   @CreateDateColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   createdAt: Date;
 
   @Field()
   @UpdateDateColumn()
+  @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
   updatedAt: Date;
 
   @BeforeInsert()

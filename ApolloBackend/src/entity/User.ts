@@ -35,10 +35,12 @@ export default class User extends BaseEntity {
 
     @Field({ nullable: true })
     @Column({ nullable: true })
+    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     firstName: string;
 
     @Field({ nullable: true })
     @Column({ nullable: true })
+    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     lastName: string;
 
     @Column()
@@ -50,6 +52,7 @@ export default class User extends BaseEntity {
     @Column("text", { unique: true })
     @IsEmail(undefined, { message: 'Must be a valid email address' })
     @Length(1, 255, { message: 'Email is empty' })
+    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     email: string;
 
     @Column("bool", { default: false })
@@ -81,15 +84,18 @@ export default class User extends BaseEntity {
     }
 
     @Field(() => [UserSubmissionType])
+    @Directive("@cacheControl(maxAge: 60, scope: PUBLIC)")
     userSubmissions: any
 
 
     @Field()
     @CreateDateColumn()
+    @Directive("@cacheControl(maxAge: 10000, scope: PUBLIC)")
     createdAt: Date;
 
     @Field()
     @UpdateDateColumn()
+    @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
     updatedAt: Date;
 
 
