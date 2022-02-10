@@ -1,11 +1,21 @@
 // ./apollo-client.js
 
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
+import { ApolloClient, createHttpLink, DefaultOptions, InMemoryCache } from "@apollo/client";
 import { createUploadLink } from 'apollo-upload-client'
 import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
 import 'cross-fetch/polyfill';
 import { sha256 } from 'crypto-hash';
 
+const defaultOptions: DefaultOptions = {
+    watchQuery: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'ignore',
+    },
+    query: {
+        fetchPolicy: 'no-cache',
+        errorPolicy: 'all',
+    },
+}
 
 const linkChain = createPersistedQueryLink({ sha256, useGETForHashedQueries: true }).concat(
     createUploadLink({
@@ -17,6 +27,7 @@ const linkChain = createPersistedQueryLink({ sha256, useGETForHashedQueries: tru
     })
 )
 const client = new ApolloClient({
+    defaultOptions: defaultOptions,
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
