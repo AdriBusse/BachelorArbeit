@@ -6,7 +6,7 @@ import { GETSUB } from '../querys/getSub';
 import { TranslateME } from '../querys/translateme';
 import PerformanceTest from './TestingComponents/PerformanceTest';
 
-const PerformanceTestButton = () => {
+const PerformanceTestButton = ({ children }) => {
     const [showModal, setShowModal] = useState(false)
 
     return (
@@ -26,9 +26,7 @@ const PerformanceTestButton = () => {
                             <p onClick={() => setShowModal(false)} className="absolute text-gray-500 cursor-pointer top-2 right-2">X</p>
                             <h3 className="text-lg font-medium leading-6 text-gray-900">GraphQL Client PerformanceTest!</h3>
                             <div className="py-3 mt-2 px-7">
-                                <PerformanceTest client={client} n={100} query={GETSUB} withCache variables={{ name: "Crypto" }} title="query with variable" />
-                                <PerformanceTest client={client} n={100} query={GETALLSUBS} withCache />
-                                <PerformanceTest client={client} n={1} query={TranslateME} withCache />
+                                {children}
                             </div>
                             <div className="items-center px-4 py-3">
                                 <button

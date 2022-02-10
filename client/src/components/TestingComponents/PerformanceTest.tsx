@@ -37,13 +37,13 @@ const PerformanceTest = ({ client, n, query, title, fileName, withCache, variabl
         for (let i = 0; i < n; i++) {
 
             const marker1 = performance.mark("start")
-            await client.query({ query, fetchPolicy: withCache ? "cache-first" : "no-cache", variables }).then(data => {
-                console.log(data);
-            })
+            await client.query({ query, fetchPolicy: withCache ? "cache-first" : "no-cache", variables })
             performance.mark("finnish")
-            performance.measure(`${i}: Time for Request with log at end`, "start", "finnish")
+            performance.measure(`Request No: ${i}`, "start", "finnish")
             performance.clearMarks("start")
             performance.clearMarks("finnish")
+            await Sleep(1000)
+
         }
         performance.mark("finnishPerformanceTest")
         performance.measure("Time for Performancetest", "startPerformanceTest", "finnishPerformanceTest")

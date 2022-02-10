@@ -18,7 +18,7 @@ const EditSub = ({ subName }: Props) => {
         variables: { name: subName }, skip: !subName, onCompleted: () => {
             setTitle(sub.getSub.title)
             setDescribtion(sub.getSub.describtion)
-        }
+        },
     });
 
     const [updateSub, { error, data, loading: loading }] = useMutation(UPDATESUB, {

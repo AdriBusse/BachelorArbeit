@@ -50,6 +50,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   });
 
   const [fetchME, { data, loading, error }] = useLazyQuery(ME, {
+    context: {
+      headers: {
+        "Cache-Control": "no-cache"
+      }
+    },
     onCompleted: (data) => {
       console.log("Finnish fetch User");
 

@@ -10,13 +10,15 @@ import client from '../apollo-client';
 import { ApolloProvider } from '@apollo/client';
 
 import PerformanceTestButton from '../components/PerformanceTestButton';
+import PerformanceTest from '../components/TestingComponents/PerformanceTest';
+import { GETSUB } from '../querys/getSub';
+import { PERFQUERYFLAT } from '../querys/PerformanceTestQueries/FlatQuery';
+import { PERFQUERYNESTED } from '../querys/PerformanceTestQueries/NestedQuery';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
   const authRoutes = ['/register', '/login'];
   const authRoute = authRoutes.includes(pathname);
-
-
 
 
   return (
@@ -27,7 +29,10 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </AuthProvider >
-      <PerformanceTestButton />
+      <PerformanceTestButton >
+        <PerformanceTest client={client} n={1} query={PERFQUERYFLAT} title="Flat Query no cache" />
+        <PerformanceTest client={client} n={200} query={PERFQUERYNESTED} title="Nested Query no cache" />
+      </PerformanceTestButton>
     </ApolloProvider>)
 }
 export default App

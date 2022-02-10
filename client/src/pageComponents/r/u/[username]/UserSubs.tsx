@@ -6,7 +6,6 @@ import { useAuthState } from '../../../../context/auth';
 import { Sub } from '../../../../types';
 import Image from 'next/image';
 import { useQuery } from '@apollo/client';
-import { GETUSER } from '../../../../querys/getUser';
 import { MESUBS } from '../../../../querys/getUserFollowedSubs';
 
 interface Props {

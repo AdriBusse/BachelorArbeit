@@ -16,7 +16,7 @@ import MySubs from '../components/MySubs';
 dayjs.extend(relativeTime);
 const IndexComponent = () => {
     //const [posts, setPosts] = useState<Post[]>([]);
-    const { data: topSubs } = useQuery(GETTOPSUBS)
+    const { data: topSubs } = useQuery(GETTOPSUBS);
 
 
 
@@ -34,7 +34,7 @@ const IndexComponent = () => {
 
     const { error, loading, data, fetchMore } = useQuery(GETPOSTS, {
         variables: {
-            postPerPage: 5,
+            postPerPage: 500,
             currentPage: page
         },
 
@@ -47,37 +47,7 @@ const IndexComponent = () => {
     const posts: Post[] = data ? [].concat(...data.getPosts) : [];
     const isInitialLoading = loading
 
-    useEffect(() => {
 
-        if (!posts || posts.length === 0) return;
-
-        const id = posts[posts.length - 1].identifier;
-        if (id != observedPost) {
-            setObservedPost(id);
-            observedElement(document.getElementById(id));
-        }
-    }, [posts]);
-
-    const observedElement = (element: HTMLElement) => {
-        if (!element) return;
-
-        const observer = new IntersectionObserver(
-            async (entries) => {
-                if (entries[0].isIntersecting === true) {
-                    console.log('reached bottom of post');
-                    setPage(page + 1);
-                    start()
-                    await fetchMore({ variables: { currentPage: page + 1 } })
-
-                    finnish()
-
-                    observer.unobserve(element);
-                }
-            },
-            { threshold: 1 }
-        );
-        observer.observe(element);
-    };
     // useEffect(() => {
     //   axios
     //     .get('/posts')

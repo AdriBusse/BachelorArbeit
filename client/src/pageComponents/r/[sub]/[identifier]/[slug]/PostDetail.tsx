@@ -15,7 +15,6 @@ import { VOTE } from '../../../../../querys/mutations/vote';
 import { COMMENTONPOST } from '../../../../../querys/mutations/commentOnPost';
 import Head from 'next/head';
 import classNames from 'classNames';
-import { printCache } from '../../../../../apollo-client';
 
 
 dayjs.extend(relativeTime);
