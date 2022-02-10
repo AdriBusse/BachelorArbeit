@@ -1,6 +1,6 @@
 import { UserSubmissionType } from './gql/SubmissionType';
 import { IsEmail, Length } from "class-validator";
-import { Directive, Field, ID, ObjectType, Root } from "type-graphql";
+import { Field, ID, ObjectType, Root } from "type-graphql";
 import { BaseEntity, BeforeInsert, Column, CreateDateColumn, Entity, Index, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 import Vote from "./Vote";
 import bcrypt from 'bcrypt';
@@ -11,7 +11,6 @@ import { Sub } from './Sub';
 
 
 
-@Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
 @ObjectType()
 @Entity({ name: 'Users' })
 export default class User extends BaseEntity {
@@ -23,24 +22,20 @@ export default class User extends BaseEntity {
     @Index()
     @Field(() => ID)
     @PrimaryGeneratedColumn()
-    @Directive("@cacheControl(maxAge: 10000, scope: PUBLIC)")
     id: number;
 
     @Field()
     @Index() //Improve Performance
     @Column({ unique: true })
     @Length(3, 255, { message: 'Must be at least 3 characters long' })
-    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     username: string;
 
     @Field({ nullable: true })
     @Column({ nullable: true })
-    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     firstName: string;
 
     @Field({ nullable: true })
     @Column({ nullable: true })
-    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     lastName: string;
 
     @Column()
@@ -52,7 +47,6 @@ export default class User extends BaseEntity {
     @Column("text", { unique: true })
     @IsEmail(undefined, { message: 'Must be a valid email address' })
     @Length(1, 255, { message: 'Email is empty' })
-    @Directive("@cacheControl(maxAge: 1000, scope: PUBLIC)")
     email: string;
 
     @Column("bool", { default: false })
@@ -84,18 +78,15 @@ export default class User extends BaseEntity {
     }
 
     @Field(() => [UserSubmissionType])
-    @Directive("@cacheControl(maxAge: 60, scope: PUBLIC)")
     userSubmissions: any
 
 
     @Field()
     @CreateDateColumn()
-    @Directive("@cacheControl(maxAge: 10000, scope: PUBLIC)")
     createdAt: Date;
 
     @Field()
     @UpdateDateColumn()
-    @Directive("@cacheControl(maxAge: 100, scope: PUBLIC)")
     updatedAt: Date;
 
 
