@@ -28,6 +28,8 @@ const linkChain = createPersistedQueryLink({ sha256, useGETForHashedQueries: tru
 )
 const client = new ApolloClient({
     defaultOptions: defaultOptions,
+    uri: "http://localhost:4000/graphql",
+    credentials: 'include',
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
@@ -46,7 +48,7 @@ const client = new ApolloClient({
             }
         }
     }),
-    link: linkChain,
+
 
 });
 export const printCache = () => {
