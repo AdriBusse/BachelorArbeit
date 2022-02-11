@@ -16,7 +16,13 @@ import MySubs from '../components/MySubs';
 dayjs.extend(relativeTime);
 const IndexComponent = () => {
     //const [posts, setPosts] = useState<Post[]>([]);
-    const { data: topSubs } = useQuery(GETTOPSUBS)
+    const { data: topSubs } = useQuery(GETTOPSUBS, {
+        context: {
+            headers: {
+                "X-CacheStrategy-sw": "no-cache",
+            }
+        }
+    })
 
 
 
@@ -37,6 +43,11 @@ const IndexComponent = () => {
             postPerPage: 5,
             currentPage: page
         },
+        context: {
+            headers: {
+                "X-CacheStrategy-sw": "network-only",
+            }
+        }
 
     });
 
