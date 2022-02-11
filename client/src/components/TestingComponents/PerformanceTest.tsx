@@ -42,7 +42,7 @@ const PerformanceTest = ({ client, n, query, title, fileName, withCache, variabl
             performance.measure(`Request No: ${i}`, "start", "finnish")
             performance.clearMarks("start")
             performance.clearMarks("finnish")
-            await Sleep(1000)
+            // await Sleep(600)
 
         }
         performance.mark("finnishPerformanceTest")

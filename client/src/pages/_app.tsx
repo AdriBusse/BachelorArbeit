@@ -30,8 +30,8 @@ function App({ Component, pageProps }: AppProps) {
         </div>
       </AuthProvider >
       <PerformanceTestButton >
-        <PerformanceTest client={client} n={1} query={PERFQUERYFLAT} title="Flat Query no cache" />
-        <PerformanceTest client={client} n={200} query={PERFQUERYNESTED} title="Nested Query no cache" />
+        <PerformanceTest client={client} n={100} query={PERFQUERYFLAT} title="Flat Query no cache" />
+        <PerformanceTest client={client} n={100} query={PERFQUERYNESTED} title="Nested Query no cache" />
       </PerformanceTestButton>
     </ApolloProvider>)
 }
