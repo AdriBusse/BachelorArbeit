@@ -24,16 +24,17 @@ const PerformanceTestButton = ({ children }) => {
                     >
                         <div className="mt-3 text-center">
                             <p onClick={() => setShowModal(false)} className="absolute text-gray-500 cursor-pointer top-2 right-2">X</p>
-                            <h3 className="text-lg font-medium leading-6 text-gray-900">GraphQL Client PerformanceTest!</h3>
+                            <h3 className="text-lg font-medium leading-6 text-gray-900">GraphQL Client Performance Test</h3>
                             <div className="py-3 mt-2 px-7">
                                 {children}
                             </div>
                             <div className="items-center px-4 py-3">
                                 <button
+                                    onClick={() => setShowModal(false)}
                                     id="ok-btn"
                                     className="w-full px-4 py-2 text-base font-medium text-white bg-green-500 rounded-md shadow-sm hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300"
                                 >
-                                    OK
+                                    Close
                                 </button>
                             </div>
                         </div>

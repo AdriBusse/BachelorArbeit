@@ -14,6 +14,7 @@ import PerformanceTest from '../components/TestingComponents/PerformanceTest';
 import { GETSUB } from '../querys/getSub';
 import { PERFQUERYFLAT } from '../querys/PerformanceTestQueries/FlatQuery';
 import { PERFQUERYNESTED } from '../querys/PerformanceTestQueries/NestedQuery';
+import { LISTQUERY } from '../querys/PerformanceTestQueries/ListQuery';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -32,6 +33,7 @@ function App({ Component, pageProps }: AppProps) {
       <PerformanceTestButton >
         <PerformanceTest client={client} n={100} query={PERFQUERYFLAT} title="Flat Query no cache" />
         <PerformanceTest client={client} n={100} query={PERFQUERYNESTED} title="Nested Query no cache" />
+        <PerformanceTest client={client} n={100} query={LISTQUERY} title="List Query" />
       </PerformanceTestButton>
     </ApolloProvider>)
 }
