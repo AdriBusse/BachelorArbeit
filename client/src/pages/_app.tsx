@@ -14,6 +14,7 @@ import PerformanceTest from '../components/TestingComponents/PerformanceTest';
 import { PERFQUERYFLAT } from '../querys/PerformanceTestQueries/FlatQuery';
 import { PERFQUERYNESTED } from '../querys/PerformanceTestQueries/NestedQuery';
 import { LISTQUERY } from '../querys/PerformanceTestQueries/ListQuery';
+import CustomPerformancetest from '../components/TestingComponents/CustomPerformanceTest';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -32,9 +33,9 @@ function App({ Component, pageProps }: AppProps) {
         </div>
       </AuthProvider >
       <PerformanceTestButton >
-        <PerformanceTest client={client} n={100} query={PERFQUERYFLAT} title="flat query with SW" />
-        <PerformanceTest client={client} n={100} query={PERFQUERYNESTED} title="nested query with SW" />
-        <PerformanceTest client={client} n={100} query={LISTQUERY} title="List Query with SW" />
+        <PerformanceTest client={client} n={100} fileName="SWFlatQuery.json" query={PERFQUERYFLAT} title="flat query with SW" />
+        <PerformanceTest client={client} n={100} fileName="SWNestedtQuery.json" query={PERFQUERYNESTED} title="nested query with SW" />
+        <PerformanceTest client={client} n={100} fileName="SWListQuery.json" query={LISTQUERY} title="List Query with SW" />
       </PerformanceTestButton >
     </ApolloProvider>)
 }
