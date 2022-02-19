@@ -32,9 +32,9 @@ function App({ Component, pageProps }: AppProps) {
         </div>
       </AuthProvider >
       <PerformanceTestButton >
-        <PerformanceTest client={client} n={100} query={PERFQUERYFLAT} withCache title="Flat Query query with apollo cache" />
-        <PerformanceTest client={client} n={100} query={PERFQUERYNESTED} withCache title="Nested Query query with apollo cache" />
-        <PerformanceTest client={client} n={100} query={LISTQUERY} withCache title="List query with apollo cache" />
+        <PerformanceTest client={client} fileName="ClientCacheFlatQuery" n={100} query={PERFQUERYFLAT} withCache title="Flat Query query with apollo cache" />
+        <PerformanceTest client={client} fileName="ClientCacheNestedQuery" n={100} query={PERFQUERYNESTED} withCache title="Nested Query query with apollo cache" />
+        <PerformanceTest client={client} fileName="ClientCacheListQuery" n={100} query={LISTQUERY} withCache title="List query with apollo cache" />
       </PerformanceTestButton >
     </ApolloProvider>)
 }
