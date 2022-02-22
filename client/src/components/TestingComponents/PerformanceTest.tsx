@@ -40,7 +40,7 @@ const PerformanceTest = ({ client, n, query, title, fileName, withCache, variabl
             await client.query({
                 query, fetchPolicy: withCache ? "cache-first" : "no-cache", variables, context: {
                     headers: {
-                        "X-CacheStrategy-sw": "cache-first",
+                        "X-swCache-CacheStrategy": "cache-first",
                     }
                 }
             }).then(data => {

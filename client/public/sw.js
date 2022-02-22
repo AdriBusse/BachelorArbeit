@@ -1,5 +1,6 @@
 
 const QUERY_CACHE_KEY = 'GraphQLCache';
+const HEADERKEY = "X-swCache-CacheStrategy";
 
 function fromNetwork(request) {
     return fetch(request);
@@ -141,14 +142,11 @@ async function handleCacheOnly(event) {
             return new Response(null, init);
         }
     })());
-
-
-
 }
 
 const handleGraphQL = async (event) => {
     //console.log("GraphQL request");
-    switch (event.request.clone().headers.get("X-CacheStrategy-sw")) {
+    switch (event.request.clone().headers.get(HEADERKEY)) {
         case "network-only":
             // Request bearbeiten mit Network Only Strategie
             handleNetworkOnly(event);
