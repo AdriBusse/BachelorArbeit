@@ -26,6 +26,10 @@ const includeNoCacheHeader = response => {
     return response.headers.get("Cache-Control") && response.headers.get("Cache-Control").includes("no-cache")
 };
 
+const isNetworkOnly = response => {
+    return response.headers.get(HEADERKEY) && response.headers.get(HEADERKEY).includes("network-only");
+};
+
 const includeNoStoreHeader = response => {
     return response.headers.get("Cache-Control") && response.headers.get("Cache-Control").includes("no-store")
 };
@@ -67,12 +71,8 @@ async function handleNetworkOnly(event) {
     console.log("Strategy: Network Only");
     event.respondWith((async () => {
         const res = await fromNetwork(event.request)
-        let newRes = new Response(res.body, {
-            "status": res.status,
-            "statusText": res.statusText,
-            "headers": { ...res.headers, "usedCacheStrategy": "Network-only" }
-        });
-        return newRes
+
+        return res
     })());
 }
 async function handleStaleWhileRevalidate(event) {

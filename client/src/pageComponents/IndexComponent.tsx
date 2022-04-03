@@ -12,25 +12,28 @@ import { GETPOSTS } from '../querys/getPosts';
 import { GETTOPSUBS } from '../querys/getTopSubs';
 import { Post, Sub } from '../types';
 import MySubs from '../components/MySubs';
+import client from '../apollo-client';
 
 dayjs.extend(relativeTime);
 const IndexComponent = () => {
-    //const [posts, setPosts] = useState<Post[]>([]);
     const { data: topSubs } = useQuery(GETTOPSUBS, {
         context: {
             headers: {
-                "X-CacheStrategy-sw": "no-cache",
+                "X-swCache-CacheStrategy": "no-cache",
             }
         }
     })
 
+    useEffect(() => {
+        client.resetStore();
+    }, [])
 
 
-    //const { data: posts } = useSWR<Post[]>('/posts');
+
     const [observedPost, setObservedPost] = useState('');
     const [page, setPage] = useState(0);
     const { authenticated, user } = useAuthState();
-    // console.log("user", user);
+
 
     const [start, finnish] = useRequestTime()
 
@@ -45,14 +48,15 @@ const IndexComponent = () => {
         },
         context: {
             headers: {
-                "X-CacheStrategy-sw": "network-only",
+                "X-swCache-CacheStrategy": "cache-first",
             }
+        },
+        onCompleted: (data) => {
+            console.log("data", page);
+
         }
 
     });
-
-    // !loading && console.log('getPOSTS', data);
-
 
 
     const posts: Post[] = data ? [].concat(...data.getPosts) : [];
@@ -78,7 +82,7 @@ const IndexComponent = () => {
                     console.log('reached bottom of post');
                     setPage(page + 1);
                     start()
-                    await fetchMore({ variables: { currentPage: page + 1 } })
+                    await fetchMore({ variables: { currentPage: page + 1 }, })
 
                     finnish()
 
@@ -89,12 +93,7 @@ const IndexComponent = () => {
         );
         observer.observe(element);
     };
-    // useEffect(() => {
-    //   axios
-    //     .get('/posts')
-    //     .then((res) => setPosts(res.data))
-    //     .catch((err) => console.log(err));
-    // }, []);
+
     return (
         <div>
             <Head>
@@ -110,11 +109,13 @@ const IndexComponent = () => {
                     {isInitialLoading && (
                         <p className="text-lg text-venter">Loading...</p>
                     )}
-                    {posts?.map((post) => (
-                        <PostCard
+                    {posts?.map((post) => {
+                        return (<PostCard
                             post={post}
-                            key={post.identifier} subId={post.sub.id}                        ></PostCard>
-                    ))}
+                            key={post.identifier} subId={post.sub.id}></PostCard>)
+
+
+                    })}
                     {loading && posts.length > 0 && (
                         <p className="text-lg text-venter">Loading more Posts...</p>
                     )}

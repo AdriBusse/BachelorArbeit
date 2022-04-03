@@ -27,7 +27,7 @@ const linkChain = createPersistedQueryLink({ sha256, useGETForHashedQueries: tru
     })
 )
 const client = new ApolloClient({
-    defaultOptions: defaultOptions,
+    //defaultOptions: defaultOptions,
     cache: new InMemoryCache({
         typePolicies: {
             Query: {
