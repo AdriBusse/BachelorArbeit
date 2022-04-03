@@ -9,12 +9,10 @@ import React, { useEffect } from 'react';
 import client from '../apollo-client';
 import { ApolloProvider } from '@apollo/client';
 
-import PerformanceTestButton from '../components/PerformanceTestButton';
-import PerformanceTest from '../components/TestingComponents/PerformanceTest';
+import { PerformanceTest, PerformanceTestModal } from 'apollo_client_performance_test';
 import { PERFQUERYFLAT } from '../querys/PerformanceTestQueries/FlatQuery';
 import { PERFQUERYNESTED } from '../querys/PerformanceTestQueries/NestedQuery';
 import { LISTQUERY } from '../querys/PerformanceTestQueries/ListQuery';
-import CustomPerformancetest from '../components/TestingComponents/CustomPerformanceTest';
 
 function App({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
@@ -32,11 +30,11 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </AuthProvider >
-      <PerformanceTestButton >
-        <PerformanceTest client={client} n={100} fileName="SWFlatQuery.json" query={PERFQUERYFLAT} title="flat query with SW" />
+      <PerformanceTestModal >
+        <PerformanceTest client={client} n={100} fileName="SWFlatQuery.json" withCache query={PERFQUERYFLAT} title="flat query with SW" />
         <PerformanceTest client={client} n={100} fileName="SWNestedtQuery.json" query={PERFQUERYNESTED} title="nested query with SW" />
         <PerformanceTest client={client} n={100} fileName="SWListQuery.json" query={LISTQUERY} title="List Query with SW" />
-      </PerformanceTestButton >
+      </PerformanceTestModal >
     </ApolloProvider>)
 }
 export default App

@@ -6,7 +6,7 @@ import { GETUSERCACHE } from '../../querys/testQueries/getUserCache';
 import CacheData from "../../utils/testUtils/cacheData.json"
 
 
-const CacheControlls = () => {
+const CacheControls = () => {
 
     useEffect(() => {
         const fetchQuery = async () => {
@@ -49,4 +49,4 @@ const CacheControlls = () => {
     )
 }
 
-export default CacheControlls
+export default CacheControls

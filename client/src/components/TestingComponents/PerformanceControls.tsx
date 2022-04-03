@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PerformanceControlls = () => {
+const PerformanceControls = () => {
     const startMarker = () => {
         const marker = performance.mark('start')
         console.log(marker);
@@ -35,4 +35,4 @@ const PerformanceControlls = () => {
     )
 }
 
-export default PerformanceControlls
+export default PerformanceControls

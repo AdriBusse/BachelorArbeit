@@ -25,6 +25,10 @@ const includeCacheHeader = response => {
 const includeNoCacheHeader = response => {
     return response.headers.get("Cache-Control") && response.headers.get("Cache-Control").includes("no-cache")
 };
+
+const includeNoStoreHeader = response => {
+    return response.headers.get("Cache-Control") && response.headers.get("Cache-Control").includes("no-store")
+};
 async function getMaxAgeTime(response) {
     try {
         const time = parseInt(response.headers.get("Cache-Control").split("max-age=")[1].split(",")[0], 10);
@@ -165,10 +169,16 @@ const handleGraphQL = async (event) => {
             // Request bearbeiten mit Cache Only Strategie
             handleCacheOnly(event);
             break;
+        case "error":
+            // Error simulieren
+            console.error("simulating a Error in SW")
+            new Error("simulating Error in SW");
+            break;
+
 
         default:
             // Request bearbeiten mit Network only Strategie
-            //handleNetworkOnly(event);
+            handleNetworkOnly(event);
             break;
 
     }
@@ -190,7 +200,7 @@ try {
 
     self.addEventListener("fetch", (event) => {
         // filtert nicht GraphQL Requests und Requests die no-cache enthalten
-        if (isGraphQLRequest(event.request.clone()) && isGraphQLGetRequest(event.request.clone()) && !includeNoCacheHeader(event.request.clone())) {
+        if (isGraphQLRequest(event.request.clone()) && isGraphQLGetRequest(event.request.clone()) && !includeNoCacheHeader(event.request.clone()) && !includeNoStoreHeader(event.request.clone())) {
             handleGraphQL(event);
         }
 
