@@ -8,9 +8,8 @@ import { useRouter } from 'next/dist/client/router';
 import React, { useEffect } from 'react';
 import client from '../apollo-client';
 import { ApolloProvider } from '@apollo/client';
+import { PerformanceTestModal, PerformanceTest } from "apollo_client_performance_test";
 
-import PerformanceTestButton from '../components/PerformanceTestButton';
-import PerformanceTest from '../components/TestingComponents/PerformanceTest';
 import { GETSUB } from '../querys/getSub';
 import { PERFQUERYFLAT } from '../querys/PerformanceTestQueries/FlatQuery';
 import { PERFQUERYNESTED } from '../querys/PerformanceTestQueries/NestedQuery';
@@ -30,11 +29,11 @@ function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </div>
       </AuthProvider >
-      <PerformanceTestButton >
+      <PerformanceTestModal>
         <PerformanceTest client={client} fileName="noCacheFlatQuery" n={100} query={PERFQUERYFLAT} title="Flat Query no cache" />
         <PerformanceTest client={client} fileName="noCacheNestedQuery" n={100} query={PERFQUERYNESTED} title="Nested Query no cache" />
         <PerformanceTest client={client} fileName="noCacheListQuery" n={100} query={LISTQUERY} title="List Query" />
-      </PerformanceTestButton>
+      </PerformanceTestModal>
     </ApolloProvider>)
 }
 export default App
